@@ -52,12 +52,57 @@ namespace EmployeeManagementSystem.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Branches");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Models.Department", b =>
@@ -68,12 +113,53 @@ namespace EmployeeManagementSystem.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("GeneralDepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GeneralDepartmentId");
+
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Doctor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CivilId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedicalDiagnose")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedicalRecommendation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Other")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Models.Employee", b =>
@@ -85,39 +171,41 @@ namespace EmployeeManagementSystem.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
                     b.Property<string>("CivilId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FileNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GeneralDepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("JobName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Other")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Photo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelephoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TownId")
@@ -126,10 +214,6 @@ namespace EmployeeManagementSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BranchId");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("GeneralDepartmentId");
 
                     b.HasIndex("TownId");
 
@@ -145,11 +229,139 @@ namespace EmployeeManagementSystem.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("GeneralDepartments");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.OverTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CivilId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Other")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OverTimeTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OverTimeTypeId");
+
+                    b.ToTable("OverTimes");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.OverTimeType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OverTimeTypes");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.RefreshTokenInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RefreshTokensInfos");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Sanction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CivilId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Other")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Punishment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PunishmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("SanctionTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SanctionTypeId");
+
+                    b.ToTable("Sanctions");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.SanctionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SanctionTypes");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Models.SystemRole", b =>
@@ -176,10 +388,16 @@ namespace EmployeeManagementSystem.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Towns");
                 });
@@ -203,23 +421,96 @@ namespace EmployeeManagementSystem.Data.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("EmployeeManagementSystem.Models.VacationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VacationTypes");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Vacations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CivilId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfDays")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Other")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VacationTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VacationTypeId");
+
+                    b.ToTable("Vacations");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Branch", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.Department", "Department")
+                        .WithMany("Branches")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.City", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Department", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.GeneralDepartment", "GeneralDepartment")
+                        .WithMany("Departments")
+                        .HasForeignKey("GeneralDepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GeneralDepartment");
+                });
+
             modelBuilder.Entity("EmployeeManagementSystem.Models.Employee", b =>
                 {
                     b.HasOne("EmployeeManagementSystem.Models.Branch", "Branch")
                         .WithMany("Employees")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EmployeeManagementSystem.Models.Department", "Department")
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EmployeeManagementSystem.Models.GeneralDepartment", "GeneralDepartment")
-                        .WithMany("Employees")
-                        .HasForeignKey("GeneralDepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -229,11 +520,49 @@ namespace EmployeeManagementSystem.Data.Migrations
 
                     b.Navigation("Branch");
 
-                    b.Navigation("Department");
-
-                    b.Navigation("GeneralDepartment");
-
                     b.Navigation("Town");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.OverTime", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.OverTimeType", "OverTimeType")
+                        .WithMany()
+                        .HasForeignKey("OverTimeTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OverTimeType");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Sanction", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.SanctionType", "SanctionType")
+                        .WithMany("Sanctions")
+                        .HasForeignKey("SanctionTypeId");
+
+                    b.Navigation("SanctionType");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Town", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.City", "City")
+                        .WithMany("Towns")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Vacations", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.VacationType", "VacationType")
+                        .WithMany("Vacations")
+                        .HasForeignKey("VacationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VacationType");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Models.Branch", b =>
@@ -241,19 +570,39 @@ namespace EmployeeManagementSystem.Data.Migrations
                     b.Navigation("Employees");
                 });
 
+            modelBuilder.Entity("EmployeeManagementSystem.Models.City", b =>
+                {
+                    b.Navigation("Towns");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.Country", b =>
+                {
+                    b.Navigation("Cities");
+                });
+
             modelBuilder.Entity("EmployeeManagementSystem.Models.Department", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Branches");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Models.GeneralDepartment", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Departments");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.SanctionType", b =>
+                {
+                    b.Navigation("Sanctions");
                 });
 
             modelBuilder.Entity("EmployeeManagementSystem.Models.Town", b =>
                 {
                     b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.VacationType", b =>
+                {
+                    b.Navigation("Vacations");
                 });
 #pragma warning restore 612, 618
         }

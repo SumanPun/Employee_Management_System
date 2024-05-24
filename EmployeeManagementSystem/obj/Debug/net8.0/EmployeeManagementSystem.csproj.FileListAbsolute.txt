@@ -137,3 +137,4 @@ E:\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0\ref\Employ
 E:\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0\AutoMapper.dll
 E:\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0\BCrypt.Net-Next.dll
+E:\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0\EmployeeManagementSystem.sourcelink.json
